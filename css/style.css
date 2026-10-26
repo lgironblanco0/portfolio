@@ -363,11 +363,16 @@ h1 span,
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     background-size: cover;
     background-position: center;
     opacity: 0;
     transition: opacity 300ms ease;
+}
+
+.project-row > * {
+    position: relative;
+    z-index: 1;
 }
 
 .project-row:first-child::before {
