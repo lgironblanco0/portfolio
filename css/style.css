@@ -201,13 +201,14 @@ p {
 }
 
 h1 {
+    max-width: 12ch;
     margin-bottom: 2rem;
-    font-size: clamp(4.5rem, 13vw, 11.5rem);
+    font-size: clamp(4.5rem, 12vw, 10.5rem);
     font-weight: 900;
-    line-height: 0.83;
-    letter-spacing: -0.093em;
+    line-height: 0.88;
+    letter-spacing: -0.075em;
+    text-wrap: balance;
 }
-
 h1 span,
 .projects-heading h2 span {
     color: var(--gray);
