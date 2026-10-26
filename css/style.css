@@ -353,6 +353,39 @@ h1 span,
     transform: translateY(-4px);
 }
 
+.project-row {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.project-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.project-row:first-child::before {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+        url("../images/runningcalculator.jpg");
+}
+
+.project-row:last-child::before {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+        url("../images/gridposition.jpg");
+}
+
+.project-row:hover::before {
+    opacity: 1;
+}
+
 .project-number,
 .project-category {
     color: var(--gray);
