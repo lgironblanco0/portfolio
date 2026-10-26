@@ -344,11 +344,13 @@ h1 span,
     gap: 1.5rem;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid var(--line);
-    transition: background-color 160ms ease;
+    transition: background-color 200ms ease,
+    transform 200ms ease;
 }
 
 .project-row:hover {
     background-color: #e5e5e5;
+    transform: translateY(-4px);
 }
 
 .project-number,
