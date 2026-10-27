@@ -1,8 +1,8 @@
 :root {
     color-scheme: light;
-    --black: #000000;
-    --white: #ffffff;
-    --gray: #000000;
+    --black: #000;
+    --white: #fff;
+    --gray: #555;
     --line: #e5e5e5;
     --font: "Geist", Arial, sans-serif;
 }
@@ -12,6 +12,7 @@
 }
 
 html {
+    scroll-behavior: smooth;
     scroll-padding-top: 2rem;
 }
 
@@ -53,7 +54,7 @@ summary:focus-visible {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    z-index: 5;
+    z-index: 10;
     padding: 0.75rem 1rem;
     transform: translateY(-200%);
     background: var(--black);
@@ -65,10 +66,13 @@ summary:focus-visible {
     transform: translateY(0);
 }
 
+/* NAVEGACIÓN */
+
 .site-header {
     position: relative;
-    z-index: 2;
+    z-index: 5;
     border-bottom: 1px solid var(--line);
+    background: var(--white);
 }
 
 .site-nav {
@@ -79,11 +83,12 @@ summary:focus-visible {
     gap: 2rem;
 }
 
-.brand {
+.brand,
+.footer-brand {
     width: 3rem;
     height: 3rem;
     display: block;
-    text-decoration: none;
+    flex: 0 0 auto;
 }
 
 .brand svg,
@@ -116,7 +121,6 @@ summary:focus-visible {
 }
 
 .site-menu summary span {
-    display: inline-block;
     font-size: 1.2rem;
     font-weight: 400;
 }
@@ -130,6 +134,7 @@ summary:focus-visible {
     padding: 0.5rem 1rem;
     border: 1px solid var(--line);
     background: var(--white);
+    box-shadow: 0 1rem 2rem rgb(0 0 0 / 6%);
 }
 
 .menu-links a,
@@ -157,6 +162,8 @@ summary:focus-visible {
 .social-links a:hover {
     color: var(--black);
 }
+
+/* PORTADA */
 
 .hero {
     position: relative;
@@ -187,7 +194,7 @@ summary:focus-visible {
 .eyebrow {
     margin: 0 0 1rem;
     color: var(--gray);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -209,6 +216,7 @@ h1 {
     letter-spacing: -0.075em;
     text-wrap: balance;
 }
+
 h1 span,
 .projects-heading h2 span {
     color: var(--gray);
@@ -250,6 +258,8 @@ h1 span,
     text-transform: uppercase;
 }
 
+/* ESTRUCTURA GENERAL DE LAS SECCIONES */
+
 .section {
     padding-block: clamp(5rem, 10vw, 8rem);
     border-bottom: 1px solid var(--line);
@@ -263,7 +273,8 @@ h1 span,
     margin-bottom: 3rem;
 }
 
-.section-heading .eyebrow {
+.section-heading .eyebrow,
+.contact-content > .eyebrow {
     padding-top: 0.75rem;
 }
 
@@ -274,41 +285,73 @@ h1 span,
     font-weight: 900;
     line-height: 0.9;
     letter-spacing: -0.08em;
+    text-wrap: balance;
 }
 
-.about-content {
-    max-width: 50rem;
-    margin: 0 0 3rem auto;
+/* SOBRE MÍ — DISEÑO EDITORIAL CON STICKY SCROLL */
+
+.about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 6rem);
 }
 
-.about-section .section-heading {
+/* El bloque completo de presentación se mantiene visible al desplazarse. */
+.about-intro {
     position: sticky;
     top: 2rem;
     align-self: start;
 }
-.about-copy {
-    margin: 0;
-    font-size: clamp(1.25rem, 2vw, 1.65rem);
-    font-weight: 500;
-    line-height: 1.5;
+
+/* Evita que el título tenga un segundo sticky independiente. */
+.about-intro .section-heading {
+    position: static;
+    display: block;
+    margin-bottom: 2rem;
 }
 
-.skills {
+.about-intro .section-heading .eyebrow {
+    padding-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.about-intro .section-heading h2 {
+    max-width: 10ch;
+}
+
+.about-content {
+    max-width: 38rem;
+    margin: 0;
+}
+
+.about-copy {
+    margin: 0;
+    font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--gray);
+}
+
+/* Las tarjetas pasan por el lado derecho de la presentación. */
+.about-skills {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .skill {
     min-width: 0;
-    min-height: 13rem;
-    padding: 1.25rem;
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid var(--line);
-    transition: background-color 160ms ease;
+    transition: background-color 200ms ease;
 }
 
 .skill:hover {
-    background-color: #e5e5e5;
+    background-color: #f0f0f0;
 }
 
 .skill > span {
@@ -319,17 +362,20 @@ h1 span,
 }
 
 .skill h3 {
-    margin: 2.5rem 0 0.5rem;
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    margin: 2rem 0 0.5rem;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
     font-weight: 800;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.06em;
 }
 
 .skill p {
+    max-width: 24rem;
     margin: 0;
     color: var(--gray);
     font-size: 0.98rem;
 }
+
+/* PROYECTOS */
 
 .projects-heading {
     margin-bottom: 3rem;
@@ -342,6 +388,9 @@ h1 span,
 }
 
 .project-row {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     min-width: 0;
     min-height: 24rem;
     display: grid;
@@ -349,21 +398,10 @@ h1 span,
     gap: 1.5rem;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid var(--line);
-    transition: background-color 200ms ease,
-    transform 200ms ease;
+    transition: transform 200ms ease, background-color 200ms ease;
 }
 
-.project-row:hover {
-    background-color: #e5e5e5;
-    transform: translateY(-4px);
-}
-
-.project-row {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-}
-
+/* Imagen de fondo: aparece al pasar el cursor por la tarjeta. */
 .project-row::before {
     content: "";
     position: absolute;
@@ -375,21 +413,27 @@ h1 span,
     transition: opacity 300ms ease;
 }
 
-.project-row > * {
-    position: relative;
-    z-index: 1;
-}
-
 .project-row:first-child::before {
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+        linear-gradient(rgb(255 255 255 / 72%), rgb(255 255 255 / 72%)),
         url("../images/runningcalculator.jpg");
 }
 
 .project-row:last-child::before {
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+        linear-gradient(rgb(255 255 255 / 72%), rgb(255 255 255 / 72%)),
         url("../images/gridposition.jpg");
+}
+
+/* Mantiene el texto y los enlaces por encima de la imagen. */
+.project-row > * {
+    position: relative;
+    z-index: 1;
+}
+
+.project-row:hover {
+    background-color: #e5e5e5;
+    transform: translateY(-4px);
 }
 
 .project-row:hover::before {
@@ -451,6 +495,8 @@ h1 span,
     border-color: var(--black);
 }
 
+/* CONTACTO */
+
 .contact-section {
     padding-block: clamp(6rem, 12vw, 10rem);
 }
@@ -459,10 +505,6 @@ h1 span,
     display: grid;
     grid-template-columns: minmax(10rem, 0.6fr) 1.4fr;
     column-gap: 2rem;
-}
-
-.contact-content > .eyebrow {
-    padding-top: 0.75rem;
 }
 
 .contact-content h2,
@@ -490,19 +532,15 @@ h1 span,
 
 .social-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin-top: 2rem;
 }
 
+/* PIE DE PÁGINA */
+
 .site-footer {
     padding-block: 1.5rem;
-}
-
-.footer-brand {
-    width: 3rem;
-    height: 3rem;
-    display: block;
-    flex: 0 0 auto;
 }
 
 .site-footer .container {
@@ -517,6 +555,8 @@ h1 span,
     color: var(--gray);
     font-size: 0.85rem;
 }
+
+/* TABLET Y MÓVIL */
 
 @media (max-width: 48rem) {
     .container {
@@ -550,12 +590,26 @@ h1 span,
         padding-top: 0;
     }
 
-    .skills {
+    /* En pantallas pequeñas, desactivamos el sticky. */
+    .about-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-intro {
+        position: static;
+    }
+
+    .about-intro .section-heading h2 {
+        max-width: none;
+    }
+
+    .about-skills {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .skill {
-        min-height: 11rem;
+    .about-skills .skill {
+        min-height: 12rem;
     }
 
     .project-list {
@@ -577,6 +631,8 @@ h1 span,
         margin-top: 0.5rem;
     }
 }
+
+/* MÓVILES ESTRECHOS */
 
 @media (max-width: 32rem) {
     .container {
@@ -611,12 +667,12 @@ h1 span,
         font-size: clamp(2.8rem, 11vw, 4.5rem);
     }
 
-    .skills {
+    .about-skills {
         grid-template-columns: 1fr;
     }
 
-    .skill {
-        min-height: 0;
+    .about-skills .skill {
+        min-height: 10rem;
     }
 
     .skill h3 {
@@ -628,15 +684,23 @@ h1 span,
         flex-wrap: wrap;
     }
 
-    .site-footer p:nth-of-type(1) {
+    .site-footer p:first-of-type {
         display: none;
     }
 }
 
+/* RESPETO A LA PREFERENCIA DE MENOS ANIMACIONES */
+
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }
