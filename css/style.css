@@ -281,6 +281,11 @@ h1 span,
     margin: 0 0 3rem auto;
 }
 
+.about-section .section-heading {
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+}
 .about-copy {
     margin: 0;
     font-size: clamp(1.25rem, 2vw, 1.65rem);
