@@ -1,3 +1,4 @@
+
 :root {
     color-scheme: light;
     --black: #000;
@@ -258,7 +259,7 @@ h1 span,
     text-transform: uppercase;
 }
 
-/* ESTRUCTURA GENERAL DE LAS SECCIONES */
+/* SECCIONES */
 
 .section {
     padding-block: clamp(5rem, 10vw, 8rem);
@@ -288,7 +289,7 @@ h1 span,
     text-wrap: balance;
 }
 
-/* SOBRE MÍ — DISEÑO EDITORIAL CON STICKY SCROLL */
+/* SOBRE MÍ: STICKY SCROLL */
 
 .about-layout {
     display: grid;
@@ -297,18 +298,25 @@ h1 span,
     gap: clamp(2rem, 6vw, 6rem);
 }
 
-/* El bloque completo de presentación se mantiene visible al desplazarse. */
+/*
+   La presentación queda fija en la columna izquierda.
+   Su fondo opaco evita que las tarjetas se transparenten.
+*/
 .about-intro {
     position: sticky;
     top: 2rem;
     align-self: start;
+    z-index: 2;
+    min-width: 0;
+    background: var(--white);
+    padding-bottom: 1.5rem;
 }
 
-/* Evita que el título tenga un segundo sticky independiente. */
+/* Solo el bloque completo es sticky, no el título por separado. */
 .about-intro .section-heading {
     position: static;
     display: block;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .about-intro .section-heading .eyebrow {
@@ -318,6 +326,10 @@ h1 span,
 
 .about-intro .section-heading h2 {
     max-width: 10ch;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.075em;
+    overflow-wrap: break-word;
 }
 
 .about-content {
@@ -327,16 +339,17 @@ h1 span,
 
 .about-copy {
     margin: 0;
-    font-size: clamp(1.15rem, 1.7vw, 1.4rem);
-    font-weight: 400;
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.6;
     color: var(--gray);
 }
 
-/* Las tarjetas pasan por el lado derecho de la presentación. */
+/* TARJETAS DE HABILIDADES */
+
 .about-skills {
     display: grid;
     gap: 1rem;
+    min-width: 0;
 }
 
 .skill {
@@ -347,6 +360,7 @@ h1 span,
     justify-content: space-between;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid var(--line);
+    background: var(--white);
     transition: background-color 200ms ease;
 }
 
@@ -398,10 +412,12 @@ h1 span,
     gap: 1.5rem;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid var(--line);
+    background: var(--white);
     transition: transform 200ms ease, background-color 200ms ease;
 }
 
-/* Imagen de fondo: aparece al pasar el cursor por la tarjeta. */
+/* Imágenes al pasar el cursor. */
+
 .project-row::before {
     content: "";
     position: absolute;
@@ -411,6 +427,7 @@ h1 span,
     background-position: center;
     opacity: 0;
     transition: opacity 300ms ease;
+    pointer-events: none;
 }
 
 .project-row:first-child::before {
@@ -425,7 +442,6 @@ h1 span,
         url("../images/gridposition.jpg");
 }
 
-/* Mantiene el texto y los enlaces por encima de la imagen. */
 .project-row > * {
     position: relative;
     z-index: 1;
@@ -556,7 +572,7 @@ h1 span,
     font-size: 0.85rem;
 }
 
-/* TABLET Y MÓVIL */
+/* TABLET */
 
 @media (max-width: 48rem) {
     .container {
@@ -590,7 +606,7 @@ h1 span,
         padding-top: 0;
     }
 
-    /* En pantallas pequeñas, desactivamos el sticky. */
+    /* El sticky se desactiva para que no se solape en móvil. */
     .about-layout {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -598,10 +614,14 @@ h1 span,
 
     .about-intro {
         position: static;
+        z-index: auto;
+        background: transparent;
+        padding-bottom: 0;
     }
 
     .about-intro .section-heading h2 {
-        max-width: none;
+        max-width: 12ch;
+        font-size: clamp(2.8rem, 8vw, 4.5rem);
     }
 
     .about-skills {
@@ -689,7 +709,7 @@ h1 span,
     }
 }
 
-/* RESPETO A LA PREFERENCIA DE MENOS ANIMACIONES */
+/* MENOS MOVIMIENTO SI EL USUARIO LO PREFIERE */
 
 @media (prefers-reduced-motion: reduce) {
     html {
