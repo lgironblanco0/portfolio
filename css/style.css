@@ -711,7 +711,11 @@ h1 {
     /* Algunos móviles convierten ↗ en emoji. Forzamos la variante de texto
        solo en responsive para conservar la flecha monocroma del diseño. */
     .project-arrow,
-    .preview-open {
+    .preview-open,
+    .text-arrow,
+    .skill-arrow,
+    .round-link,
+    .scroll-icon {
         font-variant-emoji: text;
         font-family: Arial, sans-serif;
     }
