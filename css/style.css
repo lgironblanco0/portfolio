@@ -708,6 +708,14 @@ h1 {
 /* TABLET */
 
 @media (max-width: 48rem) {
+    /* Algunos móviles convierten ↗ en emoji. Forzamos la variante de texto
+       solo en responsive para conservar la flecha monocroma del diseño. */
+    .project-arrow,
+    .preview-open {
+        font-variant-emoji: text;
+        font-family: Arial, sans-serif;
+    }
+
     :root { --gutter: 1.5rem; }
 
     .hero { min-height: 42rem; }
